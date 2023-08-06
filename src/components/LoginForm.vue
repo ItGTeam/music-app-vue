@@ -66,9 +66,7 @@ export default {
       this.login_alert_msg = 'Please wait! We are logging you in.'
 
       try {
-        console.log(values);
-        const jooy = await this.authenticate(values)
-        console.log(jooy)
+        await this.authenticate(values)
       } catch (error) {
         this.login_in_submission = false
         this.login_alert_variant = 'bg-red-500'
@@ -78,7 +76,7 @@ export default {
 
       this.login_alert_variant = 'bg-green-500'
       this.login_alert_msg = 'Success! You are now logged in.'
-      // window.location.reload()
+      window.location.reload()
     }
   }
 }

@@ -27,11 +27,8 @@ export default defineStore('user', {
       this.userLoggedIn = true;
     },
     async authenticate(values) {
-      auth.signInWithEmailAndPassword(values.email, values.password).then((data) => {
-        console.log('Successfully logged in!',data);
-      });
-      console.log('we here');
-      // console.log(login);
+      await auth.signInWithEmailAndPassword(values.email, values.password)
+
       this.userLoggedIn = true;
     },
     async signOut() {

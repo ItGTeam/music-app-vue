@@ -6,13 +6,13 @@ import 'firebase/storage';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyAqNensAf2df7xsEmxdNJm5tHcp1EGCmH8",
-    authDomain: "music-app-d885f.firebaseapp.com",
-    projectId: "music-app-d885f",
-    storageBucket: "music-app-d885f.appspot.com",
-    messagingSenderId: "902714950487",
-    appId: "1:902714950487:web:03c0561d96d7f565307412"
-  };
+  apiKey: "AIzaSyAqNensAf2df7xsEmxdNJm5tHcp1EGCmH8",
+  authDomain: "music-app-d885f.firebaseapp.com",
+  projectId: "music-app-d885f",
+  storageBucket: "music-app-d885f.appspot.com",
+  messagingSenderId: "902714950487",
+  appId: "1:902714950487:web:03c0561d96d7f565307412"
+};
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -23,5 +23,6 @@ const storage = firebase.storage();
 
 const usersCollection = db.collection("users");
 const songsCollection = db.collection('songs');
+const commentsCollection = db.collection('comments');
 
-export { auth, db, usersCollection,storage,songsCollection };
+export { auth, db, usersCollection, storage, songsCollection, commentsCollection };

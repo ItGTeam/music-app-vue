@@ -51,13 +51,12 @@ export default {
       uploads: []
     }
   },
+  props: ['addSong'],
   methods: {
     upload($event) {
       this.is_dragover = false
 
-      const files = $event.dataTransfer
-        ? [...$event.dataTransfer.files]
-        : [...$event.target.files];
+      const files = $event.dataTransfer ? [...$event.dataTransfer.files] : [...$event.target.files]
 
       files.forEach((file) => {
         if (file.type !== 'audio/mpeg') {
@@ -100,7 +99,10 @@ export default {
             }
 
             song.url = await task.snapshot.ref.getDownloadURL()
-            await songsCollection.add(song)
+            const songRef= await songsCollection.add(song)
+            const songSnapshot=await songRef.get()
+
+            this.addSong(songSnapshot)
 
             this.uploads[uploadIndex].variant = 'bg-green-400'
             this.uploads[uploadIndex].icon = 'fas fa-check'
@@ -109,7 +111,7 @@ export default {
         )
       })
       console.log($event)
-    },
+    }
     // cancelUploads() {
     //   this.uploads.forEach((upload) => {
     //     upload.task.cancel()
@@ -118,8 +120,8 @@ export default {
   },
   beforeUnmount() {
     this.uploads.forEach((upload) => {
-      upload.task.cancel();
-    });
-  },
+      upload.task.cancel()
+    })
+  }
 }
 </script>
