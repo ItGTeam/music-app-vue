@@ -15,15 +15,14 @@ export default defineStore("player", {
       if (this.sound instanceof Howl) {
         this.sound.unload();
       }
-
-      this.current_song = song;
+      this.current_song = song
 
       this.sound = new Howl({
         src: [song.url],
-        html5: true,
-      });
+        html5: true, // Force to HTML5 so that the audio can stream in webkit
+      })
 
-      this.sound.play();
+      this.sound.play()
 
       this.sound.on("play", () => {
         requestAnimationFrame(this.progress);
@@ -33,7 +32,6 @@ export default defineStore("player", {
       if (!this.sound.playing) {
         return;
       }
-
       if (this.sound.playing()) {
         this.sound.pause();
       } else {
