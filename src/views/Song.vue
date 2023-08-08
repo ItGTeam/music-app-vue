@@ -1,6 +1,5 @@
 <template>
   <main>
-
     <!-- Music Header -->
     <section class="w-full mb-8 py-14 text-center text-white relative">
       <div
@@ -20,6 +19,9 @@
           <!-- Song Info -->
           <div class="text-3xl font-bold">{{ song.modified_name }}</div>
           <div>{{ song.genre }}</div>
+          <div class="song-price">
+            {{ $n(1, 'currency') }}
+          </div>
         </div>
       </div>
     </section>
@@ -28,7 +30,11 @@
       <div class="bg-white rounded border border-gray-200 relative flex flex-col">
         <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200">
           <!-- Comment Count -->
-          <span class="card-title">Comments ({{ song.comment_count }})</span>
+          <span class="card-title">{{
+            $tc('song.comment_count', song.comment_count, {
+              count: song.comment_count
+            })
+          }}</span>
           <i class="fa fa-comments float-right text-green-400 text-2xl"></i>
         </div>
         <div class="p-6">
@@ -78,7 +84,7 @@
           <div class="font-bold">{{ comment.name }}</div>
           <time>{{ comment.datePosted }}</time>
         </div>
-  
+
         <p>{{ comment.content }}</p>
       </li>
     </ul>
@@ -120,7 +126,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(usePlayerStore, ["newSong"]),
+    ...mapActions(usePlayerStore, ['newSong']),
     async addComment(values, { resetForm }) {
       this.comment_in_submission = true
       this.comment_show_alert = true
@@ -160,7 +166,7 @@ export default {
           ...doc.data()
         })
       })
-    },
+    }
   },
   async created() {
     const docSnapshot = await songsCollection.doc(this.$route.params.id).get()
