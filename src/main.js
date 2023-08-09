@@ -10,9 +10,10 @@ import veeValidatePlugin from './includes/validation'
 import { auth } from '@/includes/firebase';
 import Icon from './directives/icon'
 import i18n from '@/includes/i18n'
-
+import { registerSW } from 'virtual:pwa-register'
 
 let app;
+registerSW({ immediate: true })
 
 auth.onAuthStateChanged(() => {
     if (!app) {
