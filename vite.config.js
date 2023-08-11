@@ -7,6 +7,9 @@ import { visualizer } from "rollup-plugin-visualizer";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  test:{
+globals:true
+  },
   server: {
     port: 4124 // Change this to your desired port number
   },
